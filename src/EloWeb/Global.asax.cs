@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using EloClient.App_Start;
 
 namespace EloWeb
 {
@@ -12,6 +13,7 @@ namespace EloWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            LoadRepository.Load(Server.MapPath(@"~\App_Data\"));
         }
     }
 }

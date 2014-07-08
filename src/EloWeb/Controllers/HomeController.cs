@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using EloClient.Repositories;
 
 namespace EloWeb.Controllers
 {
@@ -6,6 +7,7 @@ namespace EloWeb.Controllers
     {
         public ActionResult Index()
         {
+            ViewData.Model = RatingsRepo.Leaderboard();
             return View();
         }
 
