@@ -11,17 +11,23 @@ namespace EloClient.Repositories
     {
         private static Dictionary<String, Player> _players;
         private static List<Game> _games;
+        private static string _path;
+
+        private const string _gamesFile = "Games.txt";
+        private const string _playersFile = "Players.txt";
 
         public static void Load(string path)
         {
-            _games = LoadGames(path + "Games.txt"); 
-            _players = LoadPlayers(path + "Players.txt");
+            _path = path;
+            _games = LoadGames(); 
+            _players = LoadPlayers();
+
             RefreshRatings();       
         }
 
-        public static List<Game> LoadGames(string path)
+        public static List<Game> LoadGames()
         {
-            var file = new StreamReader(path);
+            var file = new StreamReader(_path + _gamesFile);
             return LoadGames(file);
         }
 
@@ -36,9 +42,9 @@ namespace EloClient.Repositories
             return games;
         }
 
-        public static Dictionary<String, Player> LoadPlayers(string path)
+        public static Dictionary<String, Player> LoadPlayers()
         {
-            var file = new StreamReader(path);
+            var file = new StreamReader(_path + _playersFile);
             return LoadPlayers(file);
         }
 
@@ -53,17 +59,43 @@ namespace EloClient.Repositories
             return players;
         }
 
+        public static void AddPlayer(string name)
+        {
+            _players.Add(name, Player.CreateInitial(name));
+            WritePlayerToFile(name);
+        }
+
+        public static void AddGame(Game game)
+        {
+            _games.Add(game);
+            WriteGameToFile(game);
+            RateGame(game);
+        }
+
+
+        private static void WritePlayerToFile(string name)
+        {
+            File.AppendAllText(_path + _playersFile, name + "\n");
+        }
+
+        private static void WriteGameToFile(Game game)
+        {
+            File.AppendAllText(_path + _gamesFile, game.ToString() + "\n");
+        }
+
         public static void RefreshRatings()
         {
             foreach (var game in _games)
-            {
-                var winner = _players[game.Winner];
-                var loser = _players[game.Loser];
-                winner.Rating = EloCalc.CalculateNewRating(winner.Rating, loser.Rating, 1);
-                loser.Rating = EloCalc.CalculateNewRating(loser.Rating, loser.Rating, 0);
-            }
+                RateGame(game);
         }
 
+        private static void RateGame(Game game)
+        {
+            var winner = _players[game.Winner];
+            var loser = _players[game.Loser];
+            winner.Rating = EloCalc.CalculateNewRating(winner.Rating, loser.Rating, 1);
+            loser.Rating = EloCalc.CalculateNewRating(loser.Rating, loser.Rating, 0);            
+        }
 
         public static List<Game> Games()
         {

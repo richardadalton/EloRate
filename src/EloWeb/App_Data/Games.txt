@@ -9,3 +9,6 @@ Paul bt John
 George bt Moe
 George bt John
 Curly bt George
+Tony bt Moe
+Moe bt Curly
+Moe bt Larry
