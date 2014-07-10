@@ -1,4 +1,4 @@
-﻿using EloClient.Repositories;
+﻿using EloWeb.Repositories;
 
 namespace EloClient.App_Start
 {

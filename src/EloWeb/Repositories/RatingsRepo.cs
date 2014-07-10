@@ -1,46 +1,29 @@
-﻿using EloClient.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
+using EloClient.Models;
 
-namespace EloClient.Repositories
+namespace EloWeb.Repositories
 {
-    public class RatingsRepo
+    public partial class RatingsRepo
     {
-        private static Dictionary<String, Player> _players;
-        private static List<Game> _games;
         private static string _path;
 
-        private const string _gamesFile = "Games.txt";
+        private static Dictionary<String, Player> _players;
         private const string _playersFile = "Players.txt";
 
+        private static List<Game> _games;
+        private const string _gamesFile = "Games.txt";
+                    
         public static void Load(string path)
         {
             _path = path;
             _games = LoadGames(); 
             _players = LoadPlayers();
-
             RefreshRatings();       
         }
 
-        public static List<Game> LoadGames()
-        {
-            var file = new StreamReader(_path + _gamesFile);
-            return LoadGames(file);
-        }
-
-        public static List<Game> LoadGames(StreamReader file)
-        {
-            var games = new List<Game>();
-            string line;
-
-            while ((line = file.ReadLine()) != null)
-                games.Add(Game.Create(line));
-
-            return games;
-        }
 
         public static Dictionary<String, Player> LoadPlayers()
         {
@@ -65,17 +48,55 @@ namespace EloClient.Repositories
             WritePlayerToFile(name);
         }
 
+        private static void WritePlayerToFile(string name)
+        {
+            File.AppendAllText(_path + _playersFile, name + "\n");
+        }
+
+        public static Dictionary<String, Player> Players()
+        {
+            return _players;
+        }
+
+        public static Player PlayerByName(string name)
+        {
+            return _players[name];
+        }
+
+        public static IEnumerable<Player> Leaderboard()
+        {
+            return _players.Values.OrderByDescending(p => p.Rating);
+        }
+
+        public static IEnumerable<String> PlayerNames()
+        {
+            return _players.Values.Select(p => p.Name);
+        }
+
+
+
+        public static List<Game> LoadGames()
+        {
+            var file = new StreamReader(_path + _gamesFile);
+            return LoadGames(file);
+        }
+
+        public static List<Game> LoadGames(StreamReader file)
+        {
+            var games = new List<Game>();
+            string line;
+
+            while ((line = file.ReadLine()) != null)
+                games.Add(Game.Create(line));
+
+            return games;
+        }
+
         public static void AddGame(Game game)
         {
             _games.Add(game);
             WriteGameToFile(game);
             RateGame(game);
-        }
-
-
-        private static void WritePlayerToFile(string name)
-        {
-            File.AppendAllText(_path + _playersFile, name + "\n");
         }
 
         private static void WriteGameToFile(Game game)
@@ -100,21 +121,6 @@ namespace EloClient.Repositories
         public static List<Game> Games()
         {
             return _games;
-        }
-
-        public static Dictionary<String, Player> Players()
-        {
-            return _players;
-        }
-
-        public static Player PlayerByName(string name)
-        {
-            return _players[name];
-        }
-
-        public static IEnumerable<Player> Leaderboard()
-        {
-            return _players.Values.OrderByDescending(p => p.Rating);
         }
     }
 }

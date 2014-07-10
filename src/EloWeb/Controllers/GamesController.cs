@@ -1,6 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using EloClient.Models;
-using EloClient.Repositories;
+using EloWeb.Repositories;
 
 namespace EloWeb.Controllers
 {
@@ -17,6 +18,7 @@ namespace EloWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewData.Model = new ViewModels.CreateGame { Players = RatingsRepo.PlayerNames().ToList() };
             return View();
         }
 

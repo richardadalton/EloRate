@@ -124,6 +124,7 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RatingsRepo.cs" />
+    <Compile Include="ViewModels\CreateGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Games.txt" />

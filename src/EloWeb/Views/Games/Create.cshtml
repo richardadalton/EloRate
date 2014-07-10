@@ -1,4 +1,4 @@
-﻿@model EloClient.Models.Game
+﻿@model EloWeb.ViewModels.CreateGame
 
 @{
     ViewBag.Title = "Create";
@@ -13,13 +13,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Game</h4>
+        <h4>CreateGame</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Winner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Winner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Winner, new SelectList(Model.Players))
                 @Html.ValidationMessageFor(model => model.Winner, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Loser, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Loser, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Loser, new SelectList(Model.Players))
                 @Html.ValidationMessageFor(model => model.Loser, "", new { @class = "text-danger" })
             </div>
         </div>

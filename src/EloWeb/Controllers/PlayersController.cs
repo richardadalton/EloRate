@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EloClient.Models;
-using EloClient.Repositories;
+using EloWeb.Repositories;
 
 namespace EloWeb.Controllers
 {
