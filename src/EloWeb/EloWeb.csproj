@@ -127,8 +127,6 @@
     <Compile Include="ViewModels\CreateGame.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Games.txt" />
-    <Content Include="App_Data\Players.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
