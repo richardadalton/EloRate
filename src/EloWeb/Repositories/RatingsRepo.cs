@@ -63,11 +63,6 @@ namespace EloWeb.Repositories
             return _players[name];
         }
 
-        public static IEnumerable<Player> Leaderboard()
-        {
-            return _players.Values.OrderByDescending(p => p.Rating);
-        }
-
         public static IEnumerable<String> PlayerNames()
         {
             return _players.Values.Select(p => p.Name);

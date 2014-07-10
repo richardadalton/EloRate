@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using EloWeb.Repositories;
 
 namespace EloWeb.Controllers
@@ -7,14 +8,10 @@ namespace EloWeb.Controllers
     {
         public ActionResult Index()
         {
-            ViewData.Model = RatingsRepo.Leaderboard();
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
+            ViewData.Model = RatingsRepo.Players()
+                                        .Values
+                                        .OrderByDescending(p => p.Rating);
+            
             return View();
         }
     }

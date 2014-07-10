@@ -18,7 +18,7 @@ namespace EloWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewData.Model = new ViewModels.CreateGame { Players = RatingsRepo.PlayerNames().ToList() };
+            ViewData.Model = new ViewModels.CreateGame { Players = RatingsRepo.PlayerNames().OrderBy(p=>p) };
             return View();
         }
 
