@@ -19,16 +19,32 @@ namespace EloWeb.Repositories
         public static void Load(string path)
         {
             _path = path;
+
+            if (!Directory.Exists(path))
+                CreateNewDataFiles();
+
             _games = LoadGames(); 
             _players = LoadPlayers();
             RefreshRatings();       
         }
 
+        private static void CreateNewDataFiles()
+        {
+            Directory.CreateDirectory(_path);
+            //File.Create(_path + GamesFile);
+            //File.Create(_path + PlayersFile);
+        }
+
 
         public static Dictionary<String, Player> LoadPlayers()
         {
-            var file = new StreamReader(_path + PlayersFile);
-            return LoadPlayers(file);
+            if (File.Exists(_path + PlayersFile))
+            {
+                var file = new StreamReader(_path + PlayersFile);
+                return LoadPlayers(file);                
+            }
+
+            return new Dictionary<string, Player>();
         }
 
         public static Dictionary<string, Player> LoadPlayers(StreamReader file)
@@ -72,8 +88,13 @@ namespace EloWeb.Repositories
 
         public static List<Game> LoadGames()
         {
-            var file = new StreamReader(_path + GamesFile);
-            return LoadGames(file);
+            if (File.Exists(_path + GamesFile))
+            {
+                var file = new StreamReader(_path + GamesFile);
+                return LoadGames(file);                
+            }
+            
+            return new List<Game>();
         }
 
         public static List<Game> LoadGames(StreamReader file)
