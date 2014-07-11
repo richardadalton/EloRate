@@ -164,6 +164,7 @@
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Games\Create.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -16,6 +16,13 @@ namespace EloWeb.Controllers
             return View();
         }
 
+        // GET: Players/Details?name=......
+        public ActionResult Details(string name)
+        {
+            var player = RatingsRepo.PlayerByName(name);
+            ViewData.Model = player;
+            return View();
+        }
 
         // GET: Players/Create
         [HttpGet]
