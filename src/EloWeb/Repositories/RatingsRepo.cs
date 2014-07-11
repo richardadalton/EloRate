@@ -130,8 +130,10 @@ namespace EloWeb.Repositories
         {
             var winner = _players[game.Winner];
             var loser = _players[game.Loser];
-            winner.Rating = EloCalc.CalculateNewRating(winner.Rating, loser.Rating, 1);
-            loser.Rating = EloCalc.CalculateNewRating(loser.Rating, loser.Rating, 0);            
+
+            var exchanged = EloCalc.PointsExchanged(winner.Rating, loser.Rating);
+            winner.Rating += exchanged;
+            loser.Rating -= exchanged;            
         }
 
         public static List<Game> Games()

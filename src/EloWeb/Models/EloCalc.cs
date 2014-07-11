@@ -6,10 +6,11 @@ namespace EloWeb.Models
     {
         private const int Volatility = 50;
 
-        public static int CalculateNewRating(int rating, int opponentRating, int score)
+        public static int PointsExchanged(int winnerRating, int loserRating)
         {
-            var expected = (decimal)rating / (rating + opponentRating);
-            return (Int32)Math.Round((rating + Volatility * (score - expected)), MidpointRounding.AwayFromZero);
+            var expected = (decimal)winnerRating / (winnerRating + loserRating);
+            return (Int32)Math.Round((Volatility * (1 - expected)), MidpointRounding.AwayFromZero);
         }
+
     }
 }
