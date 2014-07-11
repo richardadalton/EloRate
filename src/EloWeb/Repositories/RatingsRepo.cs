@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EloClient.Models;
+using EloWeb.Models;
 
 namespace EloWeb.Repositories
 {
-    public partial class RatingsRepo
+    public class RatingsRepo
     {
         private static string _path;
 
         private static Dictionary<String, Player> _players;
-        private const string _playersFile = "Players.txt";
+        private const string PlayersFile = "Players.txt";
 
         private static List<Game> _games;
-        private const string _gamesFile = "Games.txt";
+        private const string GamesFile = "Games.txt";
                     
         public static void Load(string path)
         {
@@ -27,7 +27,7 @@ namespace EloWeb.Repositories
 
         public static Dictionary<String, Player> LoadPlayers()
         {
-            var file = new StreamReader(_path + _playersFile);
+            var file = new StreamReader(_path + PlayersFile);
             return LoadPlayers(file);
         }
 
@@ -50,7 +50,7 @@ namespace EloWeb.Repositories
 
         private static void WritePlayerToFile(string name)
         {
-            File.AppendAllText(_path + _playersFile, name + "\n");
+            File.AppendAllText(_path + PlayersFile, name + "\n");
         }
 
         public static Dictionary<String, Player> Players()
@@ -72,7 +72,7 @@ namespace EloWeb.Repositories
 
         public static List<Game> LoadGames()
         {
-            var file = new StreamReader(_path + _gamesFile);
+            var file = new StreamReader(_path + GamesFile);
             return LoadGames(file);
         }
 
@@ -96,7 +96,7 @@ namespace EloWeb.Repositories
 
         private static void WriteGameToFile(Game game)
         {
-            File.AppendAllText(_path + _gamesFile, game.ToString() + "\n");
+            File.AppendAllText(_path + GamesFile, game + "\n");
         }
 
         public static void RefreshRatings()

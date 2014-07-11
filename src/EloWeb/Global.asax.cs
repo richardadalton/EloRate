@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using EloClient.App_Start;
 
 namespace EloWeb
 {

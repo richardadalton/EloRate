@@ -1,6 +1,6 @@
 ﻿using EloWeb.Repositories;
 
-namespace EloClient.App_Start
+namespace EloWeb
 {
     public class LoadRepository
     {
