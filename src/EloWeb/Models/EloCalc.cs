@@ -8,9 +8,11 @@ namespace EloWeb.Models
 
         public static int PointsExchanged(int winnerRating, int loserRating)
         {
-            var expected = (decimal)winnerRating / (winnerRating + loserRating);
-            return (Int32)Math.Round((Volatility * (1 - expected)), MidpointRounding.AwayFromZero);
+            var difference = (double)loserRating - winnerRating;
+            var expected = 1 / (1 + (Math.Pow(10,(difference/400))));
+            
+            var exchanged = (Int32)Math.Round((Volatility * (1 - expected)), MidpointRounding.AwayFromZero);
+            return exchanged;
         }
-
     }
 }
