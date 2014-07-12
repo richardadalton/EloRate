@@ -1,25 +1,50 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 namespace EloWeb.Models
 {
     public class Player
     {
-        private LinkedList<int> _ratings;
+        private LinkedList<int> _ratings = new LinkedList<int>();
 
         public string Name { get; set; }
-        public int Rating { get { return _ratings.First.Value; } }
 
-        public int MaxRating { get { return _ratings.Max(); } }
-        public int MinRating { get { return _ratings.Min(); } }
+        public int Rating
+        {
+            get
+            {
+                if(!_ratings.Any()) 
+                    return 0;
 
+                return _ratings.First.Value;
+            }
+        }
 
+        public int MaxRating
+        {
+            get
+            {
+                if (!_ratings.Any())
+                    return 0;
+                
+                return _ratings.Max();
+            }
+        }
+
+        public int MinRating
+        {
+            get
+            {
+                if (!_ratings.Any())
+                    return 0;
+
+                return _ratings.Min();
+            }
+        }
 
         public void AddRating(int rating)
         {
-            if(_ratings == null)
-                _ratings = new LinkedList<int>();
-
             _ratings.AddFirst(rating);
         }
 
