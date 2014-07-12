@@ -137,8 +137,8 @@ namespace EloWeb.Repositories
             var loser = _players[game.Loser];
 
             var exchanged = EloCalc.PointsExchanged(winner.Rating, loser.Rating);
-            winner.Rating += exchanged;
-            loser.Rating -= exchanged;            
+            winner.ChangeRating(exchanged);
+            loser.ChangeRating(-exchanged);            
         }
 
         public static List<Game> Games()
