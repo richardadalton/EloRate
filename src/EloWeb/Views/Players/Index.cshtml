@@ -27,7 +27,7 @@
             @Html.ActionLink(item.Name, "Details", "Players", new { name = item.Name }, null)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Rating)
+            @Html.DisplayFor(modelItem => item.ToString())
         </td>
     </tr>
 }

@@ -125,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RatingsRepo.cs" />
     <Compile Include="ViewModels\CreateGame.cs" />
+    <Compile Include="ViewModels\PlayerDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

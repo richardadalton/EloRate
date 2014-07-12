@@ -19,8 +19,8 @@ namespace EloWeb.Controllers
         // GET: Players/Details?name=......
         public ActionResult Details(string name)
         {
-            var player = RatingsRepo.PlayerByName(name);
-            ViewData.Model = player;
+            var playerDetails = new ViewModels.PlayerDetails(RatingsRepo.PlayerByName(name), RatingsRepo.Games());
+            ViewData.Model = playerDetails;
             return View();
         }
 

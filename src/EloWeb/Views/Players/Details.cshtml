@@ -1,4 +1,4 @@
-﻿@model EloWeb.Models.Player
+﻿@model EloWeb.ViewModels.PlayerDetails
 
 @{
     ViewBag.Title = "Details";
@@ -8,6 +8,34 @@
 <h2>@Model.Name (@Model.Rating)</h2>
 
 <div>
-    <dl class="dl-horizontal">
-    </dl>
+    <h3>Form</h3>
+    @Model.Form
+</div>
+
+<div>
+    <h3>Games Won</h3>
+    <table class="table">
+        @foreach (var opponent in Model.MostWinsAgainst)
+        {
+            <tr>
+                <td>
+                    @opponent.Key (@opponent.Count())
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h3>Games Lost</h3>
+    <table class="table">
+        @foreach (var opponent in Model.MostLossesTo)
+        {
+            <tr>
+                <td>
+                    @opponent.Key (@opponent.Count())
+                </td>
+            </tr>
+        }
+    </table>
 </div>
