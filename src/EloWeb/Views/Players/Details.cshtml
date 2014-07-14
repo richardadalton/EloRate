@@ -25,7 +25,7 @@
         {
             <tr>
                 <td>
-                    @opponent.Key (@opponent.Count())
+                    @Html.ActionLink(opponent.Key, "Details", "Players", new { name = opponent.Key }, null) (@opponent.Count())
                 </td>
             </tr>
         }
@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    @opponent.Key (@opponent.Count())
+                    @Html.ActionLink(opponent.Key, "Details", "Players", new { name = opponent.Key }, null) (@opponent.Count())
                 </td>
             </tr>
         }
