@@ -27,7 +27,7 @@ namespace EloWeb.ViewModels
                 .Where(g => g.Winner == Name || g.Loser == Name)
                 .Reverse()
                 .Take(5)
-                .Select(WOrL)
+                .Select(WorL)
                 .Reverse();
             Form = string.Join("-", recent);
 
@@ -42,7 +42,7 @@ namespace EloWeb.ViewModels
                 .OrderByDescending(group => group.Count());
         }
 
-        private object WOrL(Game game)
+        private object WorL(Game game)
         {
             return game.Winner == Name ? "W" : "L";
         }

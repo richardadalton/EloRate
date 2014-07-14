@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using EloWeb.Repositories;
 
 namespace EloWeb.Models
 {
     public class Player
     {
-        private LinkedList<int> _ratings = new LinkedList<int>();
+        public const int InitialRating = 1000;
+
+        private readonly LinkedList<int> _ratings = new LinkedList<int>();
 
         public string Name { get; set; }
 
@@ -76,7 +76,7 @@ namespace EloWeb.Models
         public static Player CreateInitial(string name)
         {
             var player = new Player {Name = name};
-            player.AddRating(1000);
+            player.AddRating(InitialRating);
             return player;
         }
     }
