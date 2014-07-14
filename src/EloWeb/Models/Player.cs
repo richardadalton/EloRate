@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using EloWeb.Repositories;
 
 namespace EloWeb.Models
 {
@@ -40,6 +41,20 @@ namespace EloWeb.Models
                     return 0;
 
                 return _ratings.Min();
+            }
+        }
+
+        public int RatingChange
+        {
+            get
+            {
+                if (!_ratings.Any())
+                    return 0;
+
+                if (_ratings.First.Next == null)
+                    return _ratings.First.Value;
+
+                return _ratings.First.Value - _ratings.First.Next.Value;
             }
         }
 

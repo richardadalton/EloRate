@@ -22,7 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
-        <th></th>
+        <th>
+            Change
+        </th>
     </tr>
 
 @{ var rank = 1; }
@@ -36,6 +38,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RatingChange)
         </td>
     </tr>
     rank++;
