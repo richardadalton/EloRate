@@ -12,7 +12,7 @@ namespace EloWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            LoadRepository.Load(Server.MapPath(@"~\App_Data\"));
+            RestoreModelFromDisk.Load(Server.MapPath(@"~\App_Data\"));
         }
     }
 }

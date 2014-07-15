@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EloWeb.Repositories
 {
-    public class PlayerData
+    public class PlayersData
     {
         private const string PlayersFile = "Players.txt";
 

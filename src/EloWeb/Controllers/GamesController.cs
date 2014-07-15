@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using EloWeb.Models;
-using EloWeb.Repositories;
 
 namespace EloWeb.Controllers
 {
@@ -27,6 +26,7 @@ namespace EloWeb.Controllers
         public ActionResult Create(Game game)
         {
             Games.Add(game);
+            Players.UpdateRatings(game);
             return Redirect("/Games");
         }
 

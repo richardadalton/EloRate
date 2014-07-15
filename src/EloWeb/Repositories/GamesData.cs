@@ -5,7 +5,7 @@ using EloWeb.Models;
 
 namespace EloWeb.Repositories
 {
-    public class GameData
+    public class GamesData
     {
         private const string GamesFile = "Games.txt";
         

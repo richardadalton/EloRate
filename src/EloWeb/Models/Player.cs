@@ -63,7 +63,7 @@ namespace EloWeb.Models
             _ratings.AddFirst(rating);
         }
 
-        public void ChangeRating(int points)
+        public void IncreaseRating(int points)
         {
             _ratings.AddFirst(Rating + points);
         }

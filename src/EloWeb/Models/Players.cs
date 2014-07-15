@@ -8,9 +8,23 @@ namespace EloWeb.Models
     {
         private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
 
-        public static void Initialise(IEnumerable<string> names)
+        public static void Initialise(IEnumerable<String> names, IEnumerable<String> games)
         {
            names.ForEach(name => _players.Add(name, Player.CreateInitial(name)));
+           
+           Games.Initialise(games);           
+           Games.All().ForEach(UpdateRatings);            
+        }
+
+        public static void UpdateRatings(Game game)
+        {
+            var winner = PlayerByName(game.Winner);
+            var loser = PlayerByName(game.Loser);
+
+            var pointsExchanged = EloCalc.PointsExchanged(winner.Rating, loser.Rating);
+
+            winner.IncreaseRating(pointsExchanged);
+            loser.DecreaseRating(pointsExchanged);
         }
 
         public static IEnumerable<Player> All()

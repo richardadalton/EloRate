@@ -9,7 +9,7 @@ namespace EloWeb.Models
 
         public static void Initialise(IEnumerable<string> games)
         {
-            games.ForEach(game => _games.Add(Game.Create(game)));
+            games.ForEach(game => Add(Game.Create(game)));
         }
 
         public static IEnumerable<Game> All()
