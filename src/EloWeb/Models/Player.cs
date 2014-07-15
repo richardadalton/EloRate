@@ -62,6 +62,18 @@ namespace EloWeb.Models
             }
         }
 
+        public int CurrentWinningStreak
+        {
+            get
+            {
+                return String.Concat(WinsAndLosses(Games.GamesByPlayer(Name))
+                    .Reverse()
+                    .TakeWhile(r => r == 'W'))
+                    .Count();
+            }
+        }
+
+
         private object WorL(Game game)
         {
             return game.Winner == Name ? "W" : "L";
@@ -111,7 +123,6 @@ namespace EloWeb.Models
 
             return bestSoFar > bestOfRest ? bestSoFar : bestOfRest;
         }
-
 
         public int WinRate
         {

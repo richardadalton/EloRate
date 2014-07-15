@@ -14,44 +14,17 @@
     <table>
         <tr>
             <th>
-                Highest Rating Points Ever
+                All-Time Rating (@Model.MostRatingsPointsEver.First().MaxRating)
             </th>
         </tr>
-        <tr>
-            <td>
-                @Model.MostRatingsPointsEver.Name (@Model.MostRatingsPointsEver.MaxRating)
-            </td>
-        </tr>
-    </table>
-
-    <hr/>
-
-    <table>
-        <tr>
-            <th>
-                Current Top Ranked Player
-            </th>
-        </tr>
-        <tr>
-            <td>
-                @Model.CurrentTopRanked.Name (@Model.CurrentTopRanked.Rating)                
-            </td>
-        </tr>
-    </table>
-        
-    <hr/>
-
-    <table>
-        <tr>
-            <th>
-                Highest Win Rate
-            </th>
-        </tr>
-        <tr>
-            <td>
-                @Model.BestWinRate.Name (@Model.BestWinRate.WinRate%)
-            </td>
-        </tr>        
+        @foreach (var player in Model.MostRatingsPointsEver)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+            </tr>
+        }
     </table>
 
     <hr />
@@ -59,13 +32,71 @@
     <table>
         <tr>
             <th>
-                Longest Winning Streak
+                Current Rating (@Model.CurrentTopRanked.First().Rating)
             </th>
         </tr>
-        <tr>
-            <td>
-                @Model.LongestWinningStreak.Name (@Model.LongestWinningStreak.LongestWinningStreak)
-            </td>
-        </tr>
+        @foreach (var player in Model.CurrentTopRanked)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+            </tr>
+        }
     </table>
+        
+    <hr />
+
+    <table>
+        <tr>
+            <th>
+                All-Time Winning Streak (@Model.LongestWinningStreak.First().LongestWinningStreak)
+            </th>
+        </tr>
+        @foreach (var player in Model.LongestWinningStreak)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+            </tr>
+        }
+    </table>
+    
+    <hr />
+
+    <table>
+        <tr>
+            <th>
+                Current Winning Streak (@Model.CurrentWinningStreak.First().CurrentWinningStreak)
+            </th>
+        </tr>
+        @foreach (var player in Model.CurrentWinningStreak)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+            </tr>
+        }
+    </table>
+
+    <hr />
+
+    <table>
+        <tr>
+            <th>
+                Highest Win Rate (@Model.BestWinRate.First().WinRate)
+            </th>
+        </tr>
+        @foreach (var player in Model.BestWinRate)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+            </tr>
+        }
+    </table>
+
 </div>
