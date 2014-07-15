@@ -21,7 +21,7 @@
         {
             <tr>
                 <td>
-                    @player.Name
+                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
                 </td>
             </tr>
         }
@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    @player.Name
+                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
                 </td>
             </tr>
         }
@@ -57,7 +57,7 @@
         {
             <tr>
                 <td>
-                    @player.Name
+                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
                 </td>
             </tr>
         }
@@ -75,7 +75,7 @@
         {
             <tr>
                 <td>
-                    @player.Name
+                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
                 </td>
             </tr>
         }
@@ -86,17 +86,16 @@
     <table>
         <tr>
             <th>
-                Highest Win Rate (@Model.BestWinRate.First().WinRate)
+                Highest Win Rate (@Model.BestWinRate.First().WinRate%)
             </th>
         </tr>
         @foreach (var player in Model.BestWinRate)
         {
             <tr>
                 <td>
-                    @player.Name
+                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
                 </td>
             </tr>
         }
     </table>
-
 </div>
