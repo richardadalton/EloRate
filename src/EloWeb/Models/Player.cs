@@ -85,6 +85,21 @@ namespace EloWeb.Models
             }            
         }
 
+        public int WinRate
+        {
+            get
+            {
+                var games = Games.GamesByPlayer(Name).ToList();
+
+                var total = games.Count;
+                var wins = games.Count(g => g.Winner == Name);
+
+                if (wins == 0 || total == 0) return 0;
+
+                return (int)((decimal)wins/total*100);   
+            }
+        }
+
 
         public int RatingChange
         {

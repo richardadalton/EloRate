@@ -1,0 +1,56 @@
+﻿@model EloWeb.ViewModels.Records
+
+@{
+    ViewBag.Title = "Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Records</h2>
+
+<div>
+    <h4>Records</h4>
+    <hr />   
+    
+    <table>
+        <tr>
+            <th>
+                Highest Rating Points Ever
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.MostRatingsPointsEver.Name (@Model.MostRatingsPointsEver.MaxRating)
+            </td>
+        </tr>
+    </table>
+
+    <hr/>
+
+    <table>
+        <tr>
+            <th>
+                Current Top Ranked Player
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.CurrentTopRanked.Name (@Model.CurrentTopRanked.Rating)                
+            </td>
+        </tr>
+    </table>
+        
+    <hr/>
+
+    <table>
+        <tr>
+            <th>
+                Highest Win Rate
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.BestWinRate.Name (@Model.BestWinRate.WinRate)
+            </td>
+        </tr>        
+    </table>
+</div>

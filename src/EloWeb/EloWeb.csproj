@@ -128,6 +128,7 @@
     <Compile Include="Persist\GamesData.cs" />
     <Compile Include="Persist\PlayersData.cs" />
     <Compile Include="ViewModels\CreateGame.cs" />
+    <Compile Include="ViewModels\Records.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -168,6 +169,7 @@
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Games\Create.cshtml" />
     <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Players\Records.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

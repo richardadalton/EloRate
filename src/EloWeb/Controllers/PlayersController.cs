@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EloWeb.Models;
 using EloWeb.Persist;
+using EloWeb.ViewModels;
 
 namespace EloWeb.Controllers
 {
@@ -18,10 +19,17 @@ namespace EloWeb.Controllers
         // GET: Players/Details?name=......
         public ActionResult Details(string name)
         {
-            var player = Players.PlayerByName(name);
-            ViewData.Model = player;
+            ViewData.Model = Players.PlayerByName(name);
             return View();
         }
+
+        // GET: Players/Records
+        public ActionResult Records()
+        {
+            ViewData.Model = new Records();
+            return View();
+        }
+
 
         // GET: Players/Create
         [HttpGet]
