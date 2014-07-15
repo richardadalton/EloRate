@@ -1,21 +1,50 @@
-﻿@model EloWeb.ViewModels.PlayerDetails
+﻿@model EloWeb.Models.Player
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name (@Model.Rating)</h2>
+<h2>@Model.Name</h2>
 
 <div>
-    <h3>Form</h3>
-    @Model.Form
-
-    <h3>Highest Rating</h3>
-    @Model.MaxRating
-
-    <h3>Lowest Rating</h3>
-    @Model.MinRating
+    <h3>Rating</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Current                
+            </th>
+            <th>
+                Last Change
+            </th>
+            <th>
+                Lowest
+            </th>
+            <th>
+                Highest
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Form)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Rating
+            </td>
+            <td>
+                @Model.RatingChange
+            </td>
+            <td>
+                @Model.MinRating
+            </td>
+            <td>
+                @Model.MaxRating
+            </td>
+            <td>
+                @Model.Form
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div>

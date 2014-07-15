@@ -1,5 +1,5 @@
 ﻿using EloWeb.Models;
-using EloWeb.Repositories;
+using EloWeb.Persist;
 
 namespace EloWeb
 {
@@ -7,7 +7,10 @@ namespace EloWeb
     {
         public static void Load(string path)
         {
-            Players.Initialise(PlayersData.Load(path), GamesData.Load(path)); 
+            var playersFile = path + "Players.txt";
+            var gamesFile = path + "Games.txt";
+
+            Players.Initialise(PlayersData.Load(playersFile), GamesData.Load(gamesFile)); 
         }
     }
 }

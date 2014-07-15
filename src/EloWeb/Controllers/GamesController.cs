@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using EloWeb.Models;
+using EloWeb.Persist;
 
 namespace EloWeb.Controllers
 {
@@ -25,8 +26,13 @@ namespace EloWeb.Controllers
         [HttpPost]
         public ActionResult Create(Game game)
         {
-            Games.Add(game);
-            Players.UpdateRatings(game);
+            if (game.Winner != game.Loser)
+            {
+                Games.Add(game);
+                Players.UpdateRatings(game);
+                GamesData.PersistGame(game.ToString());                
+            }
+
             return Redirect("/Games");
         }
 

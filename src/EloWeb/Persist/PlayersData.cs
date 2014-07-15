@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EloWeb.Models;
 
-namespace EloWeb.Repositories
+namespace EloWeb.Persist
 {
-    public class GamesData
+    public class PlayersData
     {
-        private const string GamesFile = "Games.txt";
-        
+        private static string _path;
+
         public static IEnumerable<string> Load(string path)
         {
             try
             {
-                return File.ReadLines(path + GamesFile);
+                _path = path;
+                return File.ReadLines(_path);
             }
             catch (FileNotFoundException)
             {
@@ -21,9 +21,9 @@ namespace EloWeb.Repositories
             }
         }
 
-        private static void WriteGameToFile(Game game)
+        public static void PersistPlayer(string name)
         {
-            //File.AppendAllText(_path + GamesFile, game + "\n");
+            File.AppendAllText(_path, name + "\n");
         }
     }
 }

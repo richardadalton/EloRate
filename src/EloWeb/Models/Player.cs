@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EloWeb.Models
 {
     public class Player
     {
-        public const int InitialRating = 1000;
-
         private readonly LinkedList<int> _ratings = new LinkedList<int>();
 
         public string Name { get; set; }
@@ -44,6 +43,49 @@ namespace EloWeb.Models
             }
         }
 
+        public string Form
+        {
+            get
+            {
+                var recent = Games.GamesByPlayer(Name)
+                    .Where(g => g.Winner == Name || g.Loser == Name)
+                    .Reverse()
+                    .Take(5)
+                    .Select(WorL)
+                    .Reverse();
+                return string.Join("-", recent);
+            }
+        }
+
+        private object WorL(Game game)
+        {
+            return game.Winner == Name ? "W" : "L";
+        }
+
+        public IEnumerable<IGrouping<String, Game>> MostWinsAgainst
+        {
+            get
+            {
+                return Games.GamesByPlayer(Name)
+                   .Where(game => game.Winner == Name)
+                   .GroupBy(game => game.Loser)
+                   .OrderByDescending(group => group.Count());   
+            }
+            
+        }
+
+        public IEnumerable<IGrouping<String, Game>> MostLossesTo
+        {
+            get
+            {
+                return Games.GamesByPlayer(Name)
+                   .Where(game => game.Loser == Name)
+                   .GroupBy(game => game.Winner)
+                   .OrderByDescending(group => group.Count());                   
+            }            
+        }
+
+
         public int RatingChange
         {
             get
@@ -71,13 +113,6 @@ namespace EloWeb.Models
         public void DecreaseRating(int points)
         {
             _ratings.AddFirst(Rating - points);
-        }
-
-        public static Player CreateInitial(string name)
-        {
-            var player = new Player {Name = name};
-            player.AddRating(InitialRating);
-            return player;
         }
     }
 }

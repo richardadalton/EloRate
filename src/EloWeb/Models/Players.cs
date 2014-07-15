@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WebGrease.Css.Extensions;
 
 namespace EloWeb.Models
 {
     public class Players
     {
-        private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
+        public const int InitialRating = 1000;
 
-        public static void Initialise(IEnumerable<String> names, IEnumerable<String> games)
+        private static readonly Dictionary<string, Player> _players = new Dictionary<string, Player>();
+
+        public static void Initialise(IEnumerable<string> names, IEnumerable<string> games)
         {
-           names.ForEach(name => _players.Add(name, Player.CreateInitial(name)));
+           names.ForEach(name => Add(CreateInitial(name)));
            
            Games.Initialise(games);           
            Games.All().ForEach(UpdateRatings);            
+        }
+
+
+        public static void Add(Player player)
+        {
+            _players.Add(player.Name, player);
         }
 
         public static void UpdateRatings(Game game)
@@ -32,7 +39,7 @@ namespace EloWeb.Models
             return _players.Values;
         }
 
-        public static IEnumerable<String> Names()
+        public static IEnumerable<string> Names()
         {
             return _players.Keys;
         }
@@ -40,6 +47,13 @@ namespace EloWeb.Models
         public static Player PlayerByName(string name)
         {
             return _players[name];
+        }
+
+        public static Player CreateInitial(string name)
+        {
+            var player = new Player { Name = name };
+            player.AddRating(InitialRating);
+            return player;
         }
     }
 }

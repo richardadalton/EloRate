@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebGrease.Css.Extensions;
 
 namespace EloWeb.Models
@@ -20,6 +21,11 @@ namespace EloWeb.Models
         public static void Add(Game game)
         {
             _games.Add(game);
+        }
+
+        public static IEnumerable<Game> GamesByPlayer(string name)
+        {
+            return _games.Where(game => game.Winner == name || game.Loser == name);
         }
     }
 }

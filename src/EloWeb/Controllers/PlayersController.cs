@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using EloWeb.Models;
-using EloWeb.Repositories;
+using EloWeb.Persist;
 
 namespace EloWeb.Controllers
 {
@@ -12,15 +12,14 @@ namespace EloWeb.Controllers
         {
             var players = Players.All();
             ViewData.Model = players.OrderBy(p => p.Name);
-
             return View();
         }
 
         // GET: Players/Details?name=......
         public ActionResult Details(string name)
         {
-            var playerDetails = new ViewModels.PlayerDetails(Players.PlayerByName(name), Games.All());
-            ViewData.Model = playerDetails;
+            var player = Players.PlayerByName(name);
+            ViewData.Model = player;
             return View();
         }
 
@@ -35,6 +34,8 @@ namespace EloWeb.Controllers
         [HttpPost]
         public ActionResult Create(Player player)
         {
+            Players.Add(Players.CreateInitial(player.Name)); 
+            PlayersData.PersistPlayer(player.Name);         
             return Redirect("/Players");
         }
     }
