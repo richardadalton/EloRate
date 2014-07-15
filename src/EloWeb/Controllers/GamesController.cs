@@ -10,7 +10,7 @@ namespace EloWeb.Controllers
         // GET: Games
         public ActionResult Index()
         {
-            ViewData.Model = RatingsRepo.Games();
+            ViewData.Model = Games.All();
             return View();
         }
 
@@ -18,7 +18,7 @@ namespace EloWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewData.Model = new ViewModels.CreateGame { Players = RatingsRepo.PlayerNames().OrderBy(p=>p) };
+            ViewData.Model = new ViewModels.CreateGame { Players = Players.Names().OrderBy(p=>p) };
             return View();
         }
 
@@ -26,7 +26,7 @@ namespace EloWeb.Controllers
         [HttpPost]
         public ActionResult Create(Game game)
         {
-            RatingsRepo.AddGame(game);
+            Games.Add(game);
             return Redirect("/Games");
         }
 

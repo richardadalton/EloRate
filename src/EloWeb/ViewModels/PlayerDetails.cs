@@ -16,7 +16,7 @@ namespace EloWeb.ViewModels
         public IEnumerable<IGrouping<String, Game>> MostWinsAgainst { get; private set; }
         public IEnumerable<IGrouping<String, Game>> MostLossesTo { get; private set; }
 
-        public PlayerDetails(Player player, IList<Game> games)
+        public PlayerDetails(Player player, IEnumerable<Game> games)
         {
             Name = player.Name;
             Rating = player.Rating;

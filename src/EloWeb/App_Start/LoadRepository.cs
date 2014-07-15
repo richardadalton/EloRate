@@ -1,4 +1,6 @@
-﻿using EloWeb.Repositories;
+﻿using EloWeb.Controllers;
+using EloWeb.Models;
+using EloWeb.Repositories;
 
 namespace EloWeb
 {
@@ -6,7 +8,8 @@ namespace EloWeb
     {
         public static void Load(string path)
         {
-            RatingsRepo.Load(path);
+            Players.Initialise(PlayerData.Load(path));
+            GameData.Load(path);
         }
     }
 }
