@@ -47,13 +47,18 @@ namespace EloWeb.Models
         {
             get
             {
-                var recent = Games.GamesByPlayer(Name)
-                    .Where(g => g.Winner == Name || g.Loser == Name)
+                return String.Concat(WinsAndLosses(Games.GamesByPlayer(Name))
                     .Reverse()
-                    .Take(5)
-                    .Select(WorL)
-                    .Reverse();
-                return string.Join("-", recent);
+                    .Take(5));
+            }
+        }
+
+        public int LongestWinningStreak
+        {
+            get
+            {
+                var results = WinsAndLosses(Games.GamesByPlayer(Name));
+                return FindBestWinningStreak(results);
             }
         }
 
@@ -84,6 +89,29 @@ namespace EloWeb.Models
                    .OrderByDescending(group => group.Count());                   
             }            
         }
+
+        private string WinsAndLosses(IEnumerable<Game> games)
+        {
+            var results = games
+                .Where(g => g.Winner == Name || g.Loser == Name)
+                .Select(WorL);
+            return string.Join("", results);            
+        }
+
+        private int FindBestWinningStreak(string results)
+        {
+            var start = results.IndexOf('W');
+            if (start == -1) return 0;
+
+            var end = results.IndexOf('L', start);
+            if (end == -1) return results.Length - start;
+
+            var bestSoFar = end - start;
+            var bestOfRest = FindBestWinningStreak(results.Substring(end));
+
+            return bestSoFar > bestOfRest ? bestSoFar : bestOfRest;
+        }
+
 
         public int WinRate
         {

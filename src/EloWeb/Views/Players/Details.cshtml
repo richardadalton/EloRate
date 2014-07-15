@@ -23,9 +23,6 @@
             <th>
                 Highest
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Form)
-            </th>
         </tr>
         <tr>
             <td>
@@ -40,12 +37,41 @@
             <td>
                 @Model.MaxRating
             </td>
-            <td>
-                @Model.Form
-            </td>
         </tr>
     </table>
 </div>
+
+<hr/>
+
+<div>
+    <h3>Form</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Recent
+            </th>
+            <th>
+                Win Rate
+            </th>
+            <th>
+                Most Consecutive Wins
+            </th>
+       </tr>
+        <tr>
+            <td>
+                @Model.Form
+            </td>
+            <td>
+                @Model.WinRate%
+            </td>
+            <td>
+                @Model.LongestWinningStreak
+            </td>
+        </tr>        
+    </table>
+</div>
+
+<hr/>
 
 <div>
     <h3>Games Won</h3>
