@@ -8,6 +8,7 @@ namespace EloWeb.ViewModels
     public class Records
     {
         public IEnumerable<Player> CurrentTopRanked { get { return GetRecordHolders(p => p.Rating); } }
+        public IEnumerable<Player> MostGamesPlayed { get { return GetRecordHolders(p => p.GamesPlayed); } }
         public IEnumerable<Player> MostRatingsPointsEver { get { return GetRecordHolders(p => p.MaxRating); } }
         public IEnumerable<Player> BestWinRate { get { return GetRecordHolders(p => p.WinRate); } }
         public IEnumerable<Player> LongestWinningStreak { get { return GetRecordHolders(p => p.LongestWinningStreak); } }

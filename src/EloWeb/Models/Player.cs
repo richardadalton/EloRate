@@ -10,6 +10,11 @@ namespace EloWeb.Models
 
         public string Name { get; set; }
 
+        public int GamesPlayed
+        {
+            get { return Games.GamesByPlayer(Name).Count(); }
+        }
+
         public int Rating
         {
             get
