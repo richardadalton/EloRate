@@ -15,7 +15,14 @@ namespace EloWeb.Models
 
         public static IEnumerable<Game> All()
         {
-            return _games;
+            return _games.AsEnumerable();
+        }
+
+        public static IEnumerable<Game> MostRecent(int howMany)
+        {
+            return _games.AsEnumerable()
+                .Reverse()
+                .Take(howMany);
         }
 
         public static void Add(Game game)

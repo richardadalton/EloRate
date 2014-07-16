@@ -10,7 +10,7 @@ namespace EloWeb.Controllers
         // GET: Games
         public ActionResult Index()
         {
-            ViewData.Model = Games.All();
+            ViewData.Model = Games.MostRecent(20);
             return View();
         }
 
@@ -18,7 +18,7 @@ namespace EloWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewData.Model = new ViewModels.CreateGame { Players = Players.Names().OrderBy(p=>p) };
+            ViewData.Model = new ViewModels.CreateGame { Players = Players.Names().OrderBy(p=>p), RecentGames = Games.MostRecent(5) };
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EloWeb.Models.Game>
+﻿@model System.Collections.Generic.IEnumerable<EloWeb.Models.Game>
 
 @{
     ViewBag.Title = "Games";
@@ -7,9 +7,14 @@
 
 <h2>Games</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h4>
+    @Html.ActionLink("Add Game", "Create", "Games")
+</h4>
+
+<hr/>
+
+<h4>Last 20 Games (Most Recent First)</h4>
+
 <table class="table">
 
 @foreach (var item in Model) {

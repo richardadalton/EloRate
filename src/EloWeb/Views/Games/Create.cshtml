@@ -14,7 +14,21 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <h3>Recent Games</h3>
+        <table class="table">
+            @foreach (var game in Model.RecentGames)
+            {
+                <tr>
+                    <td>
+                        @game.ToString()
+                    </td>
+                </tr>
+            }
+        </table>
 
+
+        <h3>New Game Details</h3>
         <table>
             <tr>
                 <div class="form-group">
