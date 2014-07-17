@@ -2,7 +2,7 @@
 
 namespace EloWeb.Models
 {
-    class EloCalc
+    public class EloCalc
     {
         private const int Factor = 50;
         private const int Volatility = 400;

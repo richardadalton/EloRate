@@ -1,4 +1,5 @@
-﻿@model System.Collections.Generic.IEnumerable<EloWeb.Models.Game>
+﻿@using EloWeb.Models
+@model System.Collections.Generic.IEnumerable<EloWeb.Models.Game>
 
 @{
     ViewBag.Title = "Games";
@@ -18,7 +19,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @item.ToString()
+            @Html.ActionLink(item.Winner, "Details", "Players", new { name = item.Winner }, null)
+            @Game.BeatText()
+            @Html.ActionLink(item.Loser, "Details", "Players", new { name = item.Loser }, null)
         </td>
     </tr>
 }
