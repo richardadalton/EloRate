@@ -26,7 +26,17 @@ namespace EloWeb.Controllers
         // GET: Players/Records
         public ActionResult Records()
         {
-            ViewData.Model = new Records();
+            var recordsView = new Records
+            {
+                CurrentTopRanked = Record.GetRecordHolders(p => p.Rating),
+                MostRatingsPointsEver = Record.GetRecordHolders(p => p.MaxRating),
+                BestWinRate = Record.GetRecordHolders(p => p.WinRate),
+                LongestWinningStreak = Record.GetRecordHolders(p => p.LongestWinningStreak),
+                CurrentWinningStreak = Record.GetRecordHolders(p => p.CurrentWinningStreak),
+                MostGamesPlayed = Record.GetRecordHolders(p => p.GamesPlayed),
+            };
+
+            ViewData.Model = recordsView;
             return View();
         }
 
