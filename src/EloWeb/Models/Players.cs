@@ -10,11 +10,9 @@ namespace EloWeb.Models
 
         private static readonly Dictionary<string, Player> _players = new Dictionary<string, Player>();
 
-        public static void Initialise(IEnumerable<string> names, IEnumerable<string> games)
+        public static void Initialise(IEnumerable<string> names)
         {
-           names.ForEach(name => Add(CreateInitial(name)));
-           
-           Games.Initialise(games);           
+           names.ForEach(name => Add(CreateInitial(name)));           
            Games.All().ForEach(UpdateRatings);            
         }
 
