@@ -1,5 +1,6 @@
 ﻿using EloWeb.Models;
 using EloWeb.Persist;
+using System.IO;
 
 namespace EloWeb
 {
@@ -7,8 +8,11 @@ namespace EloWeb
     {
         public static void Load(string path)
         {
-            var playersFile = path + "Players.txt";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
             var gamesFile = path + "Games.txt";
+            var playersFile = path + "Players.txt";
 
             Players.Initialise(PlayersData.Load(playersFile), GamesData.Load(gamesFile)); 
         }

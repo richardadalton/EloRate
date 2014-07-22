@@ -11,6 +11,10 @@ namespace EloWeb.Controllers
         // GET: Players
         public ActionResult Index()
         {
+            var leaderboard = Players.All().OrderByDescending(p => p.Rating);
+            if (!leaderboard.Any())
+                return Redirect("/Players/NewLeague");
+
             var players = Players.All();
             ViewData.Model = players.OrderBy(p => p.Name);
             return View();
@@ -26,6 +30,10 @@ namespace EloWeb.Controllers
         // GET: Players/Records
         public ActionResult Records()
         {
+            var leaderboard = Players.All().OrderByDescending(p => p.Rating);
+            if (!leaderboard.Any())
+                return Redirect("/Players/NewLeague");
+
             var recordsView = new Records
             {
                 CurrentTopRanked = Record.GetRecordHolders(p => p.Rating),
@@ -40,6 +48,10 @@ namespace EloWeb.Controllers
             return View();
         }
 
+        public ActionResult NewLeague()
+        {
+            return View();
+        }
 
         // GET: Players/Create
         [HttpGet]
