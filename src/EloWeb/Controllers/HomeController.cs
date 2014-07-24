@@ -8,7 +8,11 @@ namespace EloWeb.Controllers
     {
         public ActionResult Index()
         {
-            ViewData.Model = Players.All().OrderByDescending(p => p.Rating);            
+            var leaderboard = Players.All().OrderByDescending(p => p.Rating);
+            if (!leaderboard.Any())
+                return Redirect("/Players/NewLeague");
+
+            ViewData.Model = leaderboard;
             return View();
         }
     }

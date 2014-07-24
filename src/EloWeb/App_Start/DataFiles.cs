@@ -7,6 +7,9 @@ namespace EloWeb
     {
         public static void Connect(string path)
         {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
             var gamesFile = path + "Games.txt";
             Games.Initialise(GamesData.Load(gamesFile));
 

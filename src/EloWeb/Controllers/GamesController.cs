@@ -10,6 +10,10 @@ namespace EloWeb.Controllers
         // GET: Games
         public ActionResult Index()
         {
+            var leaderboard = Players.All().OrderByDescending(p => p.Rating);
+            if (!leaderboard.Any())
+                return Redirect("/Players/NewLeague");
+
             ViewData.Model = Games.MostRecent(20);
             return View();
         }

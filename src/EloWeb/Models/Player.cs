@@ -54,7 +54,8 @@ namespace EloWeb.Models
             {
                 return String.Concat(WinsAndLosses(Games.GamesByPlayer(Name))
                     .Reverse()
-                    .Take(5));
+                    .Take(5)
+                    .Reverse());
             }
         }
 
