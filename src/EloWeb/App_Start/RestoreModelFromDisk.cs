@@ -12,9 +12,10 @@ namespace EloWeb
                 Directory.CreateDirectory(path);
 
             var gamesFile = path + "Games.txt";
-            var playersFile = path + "Players.txt";
+            Games.Initialise(GamesData.Load(gamesFile)); 
 
-            Players.Initialise(PlayersData.Load(playersFile), GamesData.Load(gamesFile)); 
+            var playersFile = path + "Players.txt";
+            Players.Initialise(PlayersData.Load(playersFile)); 
         }
     }
 }

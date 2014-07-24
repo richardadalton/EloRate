@@ -73,6 +73,7 @@
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -129,6 +130,12 @@
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\Players\Records.cshtml" />
     <Content Include="Views\Players\NewLeague.cshtml" />
+    <Content Include="Views\Tables\Rating.cshtml" />
+    <Content Include="Views\Tables\GamesPlayed.cshtml" />
+    <Content Include="Views\Tables\MaxRating.cshtml" />
+    <Content Include="Views\Tables\WinRate.cshtml" />
+    <Content Include="Views\Tables\WinningStreak.cshtml" />
+    <Content Include="Views\Tables\BestEverWinningStreak.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
