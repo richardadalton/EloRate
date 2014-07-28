@@ -83,6 +83,8 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Players.cs" />
     <Compile Include="Models\Record.cs" />
+    <Compile Include="Models\RetiredPlayers.cs" />
+    <Compile Include="Persist\RetiredPlayersData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Persist\GamesData.cs" />
     <Compile Include="Persist\PlayersData.cs" />

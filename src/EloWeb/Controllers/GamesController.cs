@@ -24,7 +24,7 @@ namespace EloWeb.Controllers
         {
             var createGameView = new ViewModels.CreateGame
             {
-                Players = Players.Names().OrderBy(p=>p), 
+                Players = Players.Active().Select(p=>p.Name).OrderBy(n=>n), 
                 RecentGames = Games.MostRecent(5)
             };
             ViewData.Model = createGameView;

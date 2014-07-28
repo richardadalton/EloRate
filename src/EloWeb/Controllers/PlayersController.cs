@@ -30,18 +30,20 @@ namespace EloWeb.Controllers
         // GET: Players/Records
         public ActionResult Records()
         {
-            var leaderboard = Players.All().OrderByDescending(p => p.Rating);
-            if (!leaderboard.Any())
+            var allPlayers = Players.All();
+            var activePlayers = Players.Active();
+
+            if (!activePlayers.Any())
                 return Redirect("/Players/NewLeague");
 
             var recordsView = new Records
             {
-                CurrentTopRanked = Record.GetRecordHolders(p => p.Rating),
-                MostRatingsPointsEver = Record.GetRecordHolders(p => p.MaxRating),
-                BestWinRate = Record.GetRecordHolders(p => p.WinRate),
-                LongestWinningStreak = Record.GetRecordHolders(p => p.LongestWinningStreak),
-                CurrentWinningStreak = Record.GetRecordHolders(p => p.CurrentWinningStreak),
-                MostGamesPlayed = Record.GetRecordHolders(p => p.GamesPlayed),
+                CurrentTopRanked = Record.GetRecordHolders(activePlayers, p => p.Rating),
+                MostRatingsPointsEver = Record.GetRecordHolders(allPlayers, p => p.MaxRating),
+                BestWinRate = Record.GetRecordHolders(activePlayers, p => p.WinRate),
+                LongestWinningStreak = Record.GetRecordHolders(allPlayers, p => p.LongestWinningStreak),
+                CurrentWinningStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentWinningStreak),
+                MostGamesPlayed = Record.GetRecordHolders(allPlayers, p => p.GamesPlayed),
             };
 
             ViewData.Model = recordsView;

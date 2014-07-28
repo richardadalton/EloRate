@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebGrease.Css.Extensions;
 
 namespace EloWeb.Models
@@ -35,6 +36,11 @@ namespace EloWeb.Models
         public static IEnumerable<Player> All()
         {
             return _players.Values;
+        }
+
+        public static IEnumerable<Player> Active()
+        {
+            return _players.Values.Where(p => !RetiredPlayers.IsRetired(p.Name));
         }
 
         public static IEnumerable<string> Names()
