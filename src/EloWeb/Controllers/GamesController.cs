@@ -37,8 +37,9 @@ namespace EloWeb.Controllers
         {
             if (game.Winner != game.Loser)
             {
+                GamesData.PersistGame(game.ToString());
+                Games.Add(game);
                 Players.UpdateRatings(game);
-                GamesData.PersistGame(game.ToString());                
             }
 
             return Redirect("/Games");
