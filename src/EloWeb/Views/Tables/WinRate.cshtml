@@ -34,7 +34,7 @@
             @Html.ActionLink(item.Name, "Details", "Players", new { name = item.Name }, null)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WinRate)
+            @Html.DisplayFor(modelItem => item.WinRate)%
         </td>
     </tr>
     rank++;
