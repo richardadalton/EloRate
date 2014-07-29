@@ -3,3 +3,5 @@ src/packages/
 src/EloWeb/bin/
 src/EloWeb/obj/
 src/EloWeb/App_Data/
+src/EloWeb.Tests.UnitTests/bin/
+src/EloWeb.Tests.UnitTests/obj/

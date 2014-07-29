@@ -10,7 +10,6 @@ namespace EloWeb.Models
         private static readonly string[] BeatTokens = { " bt ", " beat " };
         private const int ActiveToken = 1;
         
-
         public static Game FromString(string game)
         {
             var players = game.Split(BeatTokens, StringSplitOptions.None);
@@ -25,6 +24,28 @@ namespace EloWeb.Models
         public static string BeatText()
         {
             return BeatTokens[ActiveToken];
+        }
+
+
+        protected bool Equals(Game other)
+        {
+            return string.Equals(Winner, other.Winner) && string.Equals(Loser, other.Loser);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Winner != null ? Winner.GetHashCode() : 0) * 397) ^ (Loser != null ? Loser.GetHashCode() : 0);
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Game) obj);
         }
     }
 }

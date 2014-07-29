@@ -4,7 +4,7 @@ using System.IO;
 
 namespace EloWeb
 {
-    public class RestoreModelFromDisk
+    public class RestoreModelFromTextFiles
     {
         public static void Load(string path)
         {
