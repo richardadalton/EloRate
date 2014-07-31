@@ -6,16 +6,13 @@ namespace EloWeb.Models
 {
     public class Players
     {
-        public const int InitialRating = 1000;
-
-        private static readonly Dictionary<string, Player> _players = new Dictionary<string, Player>();
+        private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
 
         public static void Initialise(IEnumerable<string> names)
         {
-           names.ForEach(name => Add(CreateInitial(name)));           
+            _players = names.Select(Player.CreateInitial).ToDictionary(p => p.Name);
            Games.All().ForEach(UpdateRatings);            
         }
-
 
         public static void Add(Player player)
         {
@@ -50,14 +47,10 @@ namespace EloWeb.Models
 
         public static Player PlayerByName(string name)
         {
-            return _players[name];
-        }
+            if (!_players.ContainsKey(name))
+                return new Player();
 
-        public static Player CreateInitial(string name)
-        {
-            var player = new Player { Name = name };
-            player.AddRating(InitialRating);
-            return player;
+            return _players[name];
         }
     }
 }

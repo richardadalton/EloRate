@@ -12,7 +12,7 @@
     <table>
         <tr>
             <th>
-                All-Time Rating (@Model.MostRatingsPointsEver.First().MaxRating)
+                @Html.ActionLink("All-Time Rating", "MaxRating", "Tables") (@Model.MostRatingsPointsEver.First().MaxRating)
             </th>
         </tr>
         @foreach (var player in Model.MostRatingsPointsEver)
@@ -30,7 +30,7 @@
     <table>
         <tr>
             <th>
-                Current Rating (@Model.CurrentTopRanked.First().Rating)
+                @Html.ActionLink("Current Rating", "Rating", "Tables") (@Model.CurrentTopRanked.First().Rating)
             </th>
         </tr>
         @foreach (var player in Model.CurrentTopRanked)
@@ -48,7 +48,7 @@
     <table>
         <tr>
             <th>
-                All-Time Winning Streak (@Model.LongestWinningStreak.First().LongestWinningStreak)
+                @Html.ActionLink("All-Time Winning Streak", "BestEverWinningStreak", "Tables") (@Model.LongestWinningStreak.First().LongestWinningStreak)
             </th>
         </tr>
         @foreach (var player in Model.LongestWinningStreak)
@@ -66,7 +66,7 @@
     <table>
         <tr>
             <th>
-                Current Winning Streak (@Model.CurrentWinningStreak.First().CurrentWinningStreak)
+                @Html.ActionLink("Current Winning Streak", "WinningStreak", "Tables") (@Model.CurrentWinningStreak.First().CurrentWinningStreak)
             </th>
         </tr>
         @foreach (var player in Model.CurrentWinningStreak)
@@ -84,7 +84,7 @@
     <table>
         <tr>
             <th>
-                Highest Win Rate (@Model.BestWinRate.First().WinRate%)
+                @Html.ActionLink("Win Rate", "WinRate", "Tables") (@Model.BestWinRate.First().WinRate%)
             </th>
         </tr>
         @foreach (var player in Model.BestWinRate)
@@ -102,7 +102,7 @@
     <table>
         <tr>
             <th>
-                Most Games Played (@Model.MostGamesPlayed.First().GamesPlayed)
+                @Html.ActionLink("Most Games Played", "GamesPlayed", "Tables") (@Model.MostGamesPlayed.First().GamesPlayed)
             </th>
         </tr>
         @foreach (var player in Model.MostGamesPlayed)

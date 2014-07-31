@@ -14,7 +14,7 @@ namespace EloWeb.Tests.UnitTests
             Games.Initialise(new List<String>{"A beat B"});
 
             var expected = new Game {Winner = "A", Loser = "B"};
-            var actual = Games.MostRecent(1).First();
+            var actual = Games.MostRecent(1, Games.GamesSortOrder.MostRecentFirst).First();
 
             Assert.That(expected.Equals(actual));
         }
@@ -101,7 +101,7 @@ namespace EloWeb.Tests.UnitTests
                 new Game {Winner = "B", Loser = "C"},
             };
 
-            Assert.AreEqual(expected, Games.MostRecent(2));
+            Assert.AreEqual(expected, Games.MostRecent(2, Games.GamesSortOrder.MostRecentLast));
         }
 
         [Test]

@@ -14,7 +14,7 @@ namespace EloWeb.Controllers
             if (!leaderboard.Any())
                 return Redirect("/Players/NewLeague");
 
-            ViewData.Model = Games.MostRecent(20);
+            ViewData.Model = Games.MostRecent(20, Games.GamesSortOrder.MostRecentFirst);
             return View();
         }
 
@@ -25,7 +25,7 @@ namespace EloWeb.Controllers
             var createGameView = new ViewModels.CreateGame
             {
                 Players = Players.Active().Select(p=>p.Name).OrderBy(n=>n), 
-                RecentGames = Games.MostRecent(5)
+                RecentGames = Games.MostRecent(5, Games.GamesSortOrder.MostRecentFirst)
             };
             ViewData.Model = createGameView;
             return View();
@@ -42,7 +42,7 @@ namespace EloWeb.Controllers
                 Players.UpdateRatings(game);
             }
 
-            return Redirect("/Games");
+            return Redirect("/");
         }
 
     }

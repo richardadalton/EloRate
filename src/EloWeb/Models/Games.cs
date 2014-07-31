@@ -5,6 +5,12 @@ namespace EloWeb.Models
 {
     public class Games
     {
+        public enum GamesSortOrder
+        {
+            MostRecentFirst = 1,
+            MostRecentLast = 2
+        }
+
         private static List<Game> _games = new List<Game>();
 
         public static void Initialise(IEnumerable<string> games)
@@ -22,12 +28,16 @@ namespace EloWeb.Models
             return _games.AsEnumerable();
         }
 
-        public static IEnumerable<Game> MostRecent(int howMany)
+        public static IEnumerable<Game> MostRecent(int howMany, GamesSortOrder sortOrder)
         {
-            return _games.AsEnumerable()
+            var games = _games.AsEnumerable()
                 .Reverse()
-                .Take(howMany)
-                .Reverse();
+                .Take(howMany);
+
+            if (sortOrder == GamesSortOrder.MostRecentLast)
+                return games.Reverse();
+
+            return games;
         }
 
         public static IEnumerable<Game> GamesByPlayer(string name)
