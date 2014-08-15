@@ -102,7 +102,7 @@
     <table>
         <tr>
             <th>
-                @Html.ActionLink("Current Winning Streak", "LosingStreak", "Tables") (@Model.CurrentLosingStreak.First().CurrentLosingStreak)
+                @Html.ActionLink("Current Losing Streak", "LosingStreak", "Tables") (@Model.CurrentLosingStreak.First().CurrentLosingStreak)
             </th>
         </tr>
         @foreach (var player in Model.CurrentLosingStreak)
