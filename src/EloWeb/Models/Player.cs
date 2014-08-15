@@ -87,6 +87,25 @@ namespace EloWeb.Models
             }
         }
 
+        public int LongestLosingStreak
+        {
+            get
+            {
+                var results = WinsAndLosses(Games.GamesByPlayer(Name));
+                return FindWorstLosingStreak(results);
+            }
+        }
+
+        public int CurrentLosingStreak
+        {
+            get
+            {
+                return String.Concat(WinsAndLosses(Games.GamesByPlayer(Name))
+                    .Reverse()
+                    .TakeWhile(r => r == 'L'))
+                    .Count();
+            }
+        }
 
         private object WorL(Game game)
         {
@@ -136,6 +155,20 @@ namespace EloWeb.Models
             var bestOfRest = FindBestWinningStreak(results.Substring(end));
 
             return bestSoFar > bestOfRest ? bestSoFar : bestOfRest;
+        }
+
+        private int FindWorstLosingStreak(string results)
+        {
+            var start = results.IndexOf('L');
+            if (start == -1) return 0;
+
+            var end = results.IndexOf('W', start);
+            if (end == -1) return results.Length - start;
+
+            var worstSoFar = end - start;
+            var worstOfRest = FindWorstLosingStreak(results.Substring(end));
+
+            return worstSoFar > worstOfRest ? worstSoFar : worstOfRest;
         }
 
         public int WinRate

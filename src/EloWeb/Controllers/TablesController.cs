@@ -66,5 +66,25 @@ namespace EloWeb.Controllers
             ViewData.Model = table;
             return View();
         }
+
+        public ActionResult LosingStreak()
+        {
+            var table = Players.All().OrderByDescending(p => p.CurrentLosingStreak);
+            if (!table.Any())
+                return Redirect("/Players/NewLeague");
+
+            ViewData.Model = table;
+            return View();
+        }
+
+        public ActionResult WorstEverLosingStreak()
+        {
+            var table = Players.All().OrderByDescending(p => p.LongestLosingStreak);
+            if (!table.Any())
+                return Redirect("/Players/NewLeague");
+
+            ViewData.Model = table;
+            return View();
+        }
     }
 }

@@ -43,6 +43,8 @@ namespace EloWeb.Controllers
                 BestWinRate = Record.GetRecordHolders(activePlayers, p => p.WinRate),
                 LongestWinningStreak = Record.GetRecordHolders(allPlayers, p => p.LongestWinningStreak),
                 CurrentWinningStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentWinningStreak),
+                LongestLosingStreak = Record.GetRecordHolders(allPlayers, p => p.LongestLosingStreak),
+                CurrentLosingStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentLosingStreak),
                 MostGamesPlayed = Record.GetRecordHolders(allPlayers, p => p.GamesPlayed),
             };
 

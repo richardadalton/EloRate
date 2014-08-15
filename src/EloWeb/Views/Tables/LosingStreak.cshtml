@@ -1,0 +1,42 @@
+﻿@model System.Collections.Generic.IEnumerable<EloWeb.Models.Player>
+
+@{
+    ViewBag.Title = "Current Losing Streak Leaderboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Current Losing Streak</h2>
+
+<h4>
+@Html.ActionLink("Add Game", "Create", "Games") | @Html.ActionLink("Add Player", "Create", "Players")
+</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Rank
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentLosingStreak)
+        </th>
+    </tr>
+
+@{ var rank = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @rank
+        </td>
+        <td>
+            @Html.ActionLink(item.Name, "Details", "Players", new { name = item.Name }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentLosingStreak)
+        </td>
+    </tr>
+    rank++;
+}
+</table>

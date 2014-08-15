@@ -150,6 +150,8 @@
     <Content Include="Views\Tables\WinRate.cshtml" />
     <Content Include="Views\Tables\WinningStreak.cshtml" />
     <Content Include="Views\Tables\BestEverWinningStreak.cshtml" />
+    <Content Include="Views\Tables\LosingStreak.cshtml" />
+    <Content Include="Views\Tables\WorstEverLosingStreak.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

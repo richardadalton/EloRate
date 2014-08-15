@@ -11,5 +11,7 @@ namespace EloWeb.ViewModels
         public IEnumerable<Player> BestWinRate { get; set; }
         public IEnumerable<Player> LongestWinningStreak { get; set; }
         public IEnumerable<Player> CurrentWinningStreak { get; set; }
+        public IEnumerable<Player> LongestLosingStreak { get; set; }
+        public IEnumerable<Player> CurrentLosingStreak { get; set; }
     }
 }
