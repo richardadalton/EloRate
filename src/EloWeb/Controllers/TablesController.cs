@@ -9,7 +9,7 @@ namespace EloWeb.Controllers
         // GET: Tables
         public ActionResult Rating()
         {
-            var table = Players.All().OrderByDescending(p => p.Rating);
+            var table = Players.Active().OrderByDescending(p => p.Rating);
             if (!table.Any())
                 return Redirect("/Players/NewLeague");
 
@@ -49,7 +49,7 @@ namespace EloWeb.Controllers
 
         public ActionResult WinningStreak()
         {
-            var table = Players.All().OrderByDescending(p => p.CurrentWinningStreak);
+            var table = Players.Active().OrderByDescending(p => p.CurrentWinningStreak);
             if (!table.Any())
                 return Redirect("/Players/NewLeague");
 
@@ -69,7 +69,7 @@ namespace EloWeb.Controllers
 
         public ActionResult LosingStreak()
         {
-            var table = Players.All().OrderByDescending(p => p.CurrentLosingStreak);
+            var table = Players.Active().OrderByDescending(p => p.CurrentLosingStreak);
             if (!table.Any())
                 return Redirect("/Players/NewLeague");
 
