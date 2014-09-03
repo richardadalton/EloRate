@@ -17,16 +17,6 @@ namespace EloWeb.Controllers
             return View();
         }
 
-        public ActionResult GamesPlayed()
-        {
-            var table = Players.All().OrderByDescending(p => p.GamesPlayed);
-            if (!table.Any())
-                return Redirect("/Players/NewLeague");
-
-            ViewData.Model = table;
-            return View();
-        }
-
         public ActionResult MaxRating()
         {
             var table = Players.All().OrderByDescending(p => p.MaxRating);

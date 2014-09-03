@@ -133,21 +133,4 @@
         }
     </table>
     
-    <hr />
-
-    <table>
-        <tr>
-            <th>
-                @Html.ActionLink("Most Games Played", "GamesPlayed", "Tables") (@Model.MostGamesPlayed.First().GamesPlayed)
-            </th>
-        </tr>
-        @foreach (var player in Model.MostGamesPlayed)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(player.Name, "Details", "Players", new { name = player.Name }, null)
-                </td>
-            </tr>
-        }
-    </table>
 </div>

@@ -45,7 +45,6 @@ namespace EloWeb.Controllers
                 CurrentWinningStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentWinningStreak),
                 LongestLosingStreak = Record.GetRecordHolders(allPlayers, p => p.LongestLosingStreak),
                 CurrentLosingStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentLosingStreak),
-                MostGamesPlayed = Record.GetRecordHolders(allPlayers, p => p.GamesPlayed),
             };
 
             ViewData.Model = recordsView;

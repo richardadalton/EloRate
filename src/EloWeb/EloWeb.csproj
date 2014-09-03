@@ -145,7 +145,6 @@
     <Content Include="Views\Players\Records.cshtml" />
     <Content Include="Views\Players\NewLeague.cshtml" />
     <Content Include="Views\Tables\Rating.cshtml" />
-    <Content Include="Views\Tables\GamesPlayed.cshtml" />
     <Content Include="Views\Tables\MaxRating.cshtml" />
     <Content Include="Views\Tables\WinRate.cshtml" />
     <Content Include="Views\Tables\WinningStreak.cshtml" />

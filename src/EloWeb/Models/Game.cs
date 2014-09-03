@@ -4,28 +4,22 @@ namespace EloWeb.Models
 {
     public class Game
     {
+        private const string BEAT = "beat";
+ 
         public string Winner { get; set; }
         public string Loser { get; set; }
-
-        private static readonly string[] BeatTokens = { " bt ", " beat " };
-        private const int ActiveToken = 1;
         
         public static Game FromString(string game)
         {
-            var players = game.Split(BeatTokens, StringSplitOptions.None);
-            return new Game { Winner = players[0], Loser = players[1] };
+            var splitOn = new[] { BEAT };
+            var players = game.Split(splitOn, StringSplitOptions.None);
+            return new Game { Winner = players[0].Trim(), Loser = players[1].Trim() };
         }
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}", Winner, BeatText(), Loser);
+            return String.Format("{0} {1} {2}", Winner, BEAT ,Loser);
         }       
-
-        public static string BeatText()
-        {
-            return BeatTokens[ActiveToken];
-        }
-
 
         protected bool Equals(Game other)
         {
