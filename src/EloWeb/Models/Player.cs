@@ -9,14 +9,15 @@ namespace EloWeb.Models
         private readonly LinkedList<int> _ratings = new LinkedList<int>();
         public const int InitialRating = 1000;
 
-        public static Player CreateInitial(string name)
+        public static Player CreateInitial(string name, bool isRetired)
         {
-            var player = new Player { Name = name };
+            var player = new Player { Name = name, IsRetired = isRetired };
             player.AddRating(InitialRating);
             return player;
         }
 
         public string Name { get; set; }
+        public bool IsRetired { get; set; }
 
         public int Rating
         {

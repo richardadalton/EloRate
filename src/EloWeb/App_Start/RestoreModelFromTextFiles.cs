@@ -14,8 +14,8 @@ namespace EloWeb
             var gamesFile = path + "Games.txt";
             Games.Initialise(GamesData.Load(gamesFile)); 
 
-            var playersFile = path + "Players.txt";
-            Players.Initialise(PlayersData.Load(playersFile));
+            //var playersFile = path + "Players.txt";
+            //Players.Initialise(PlayersData.Load(playersFile));
 
             var retiredPlayersFile = path + "RetiredPlayers.txt";
             RetiredPlayers.Initialise(RetiredPlayersData.Load(retiredPlayersFile));
