@@ -16,6 +16,11 @@ namespace EloWeb.Persist
             return table.ExecuteQuery(query);
         }
 
+        public static void PersistPlayer(Player player)
+        {
+            // TODO: Write to Storage table
+        }
+
         private static CloudTable GetTable(string tableName)
         {
             string connStr = ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
