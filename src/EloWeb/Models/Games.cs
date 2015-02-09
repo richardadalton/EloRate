@@ -13,9 +13,12 @@ namespace EloWeb.Models
 
         private static List<Game> _games = new List<Game>();
 
-        public static void Initialise(IEnumerable<string> games)
+        public static void Initialise(IEnumerable<Game> gameEntities)
         {
-            _games = games.Select(Game.FromString).ToList();
+            _games = gameEntities.ToList();
+
+            foreach(var game in _games)
+                Players.UpdateRatings(game);
         }
 
         public static void Add(Game game)
