@@ -4,6 +4,7 @@ namespace EloWeb.Models
 {
     public class Game : TableEntity
     {
+        public DateTime WhenPlayed { get; set; }
         public string Winner { get; set; }
         public string Loser { get; set; }
 
