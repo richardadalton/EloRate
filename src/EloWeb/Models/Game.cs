@@ -6,5 +6,10 @@ namespace EloWeb.Models
     {
         public string Winner { get; set; }
         public string Loser { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} beat {1}", Winner, Loser);
+        }
     }
 }
