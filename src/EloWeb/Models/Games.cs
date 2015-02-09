@@ -34,6 +34,7 @@ namespace EloWeb.Models
         public static IEnumerable<Game> MostRecent(int howMany, GamesSortOrder sortOrder)
         {
             var games = _games.AsEnumerable()
+                .OrderBy(g => g.WhenPlayed)
                 .Reverse()
                 .Take(howMany);
 

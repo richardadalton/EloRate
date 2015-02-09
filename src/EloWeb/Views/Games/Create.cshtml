@@ -23,6 +23,9 @@
                     <td>
                         @game.ToString()
                     </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Games", new {Id = game.RowKey}, null)
+                    </td>
                 </tr>
             }
         </table>
