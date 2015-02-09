@@ -18,7 +18,15 @@ namespace EloWeb.Persist
 
         public static void PersistPlayer(Player player)
         {
-            // TODO: Write to Storage table
+            var playerEntity = new PlayerEntity("kobopool", player.Name, player.IsRetired);
+            var table = GetTable("players");
+            WritePlayer(table, playerEntity);
+        }
+
+        static void WritePlayer(CloudTable table, PlayerEntity player)
+        {
+            TableOperation insertOp = TableOperation.Insert(player);
+            table.Execute(insertOp);
         }
 
         private static CloudTable GetTable(string tableName)
