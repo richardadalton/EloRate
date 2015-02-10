@@ -12,13 +12,13 @@ namespace EloWeb.Persist
         public static IEnumerable<PlayerEntity> Load()
         {
             var table = GetTable("players");
-            TableQuery<PlayerEntity> query = new TableQuery<PlayerEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "kobopool"));
+            TableQuery<PlayerEntity> query = new TableQuery<PlayerEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ConfigurationManager.AppSettings["Account"]));
             return table.ExecuteQuery(query);
         }
 
         public static void PersistPlayer(Player player)
         {
-            var playerEntity = new PlayerEntity("kobopool", player.Name, player.IsRetired);
+            var playerEntity = new PlayerEntity(ConfigurationManager.AppSettings["Account"], player.Name, player.IsRetired);
             var table = GetTable("players");
             WritePlayer(table, playerEntity);
         }

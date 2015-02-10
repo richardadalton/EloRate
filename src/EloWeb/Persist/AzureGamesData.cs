@@ -13,19 +13,26 @@ namespace EloWeb.Persist
         public static IEnumerable<Game> Load()
         {
             var table = GetTable("games");
-            TableQuery<Game> query = new TableQuery<Game>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "kobopool"));
+            TableQuery<Game> query = new TableQuery<Game>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ConfigurationManager.AppSettings["Account"]));
             return table.ExecuteQuery(query);
         }
 
         public static void Persist(Game game)
         {
-            // TODO: Write to Storage table
+            game.PartitionKey = ConfigurationManager.AppSettings["Account"];
+            game.RowKey = Guid.NewGuid().ToString();
+            game.WhenPlayed = DateTime.Now;
+
+
+            var table = GetTable("games");
+            TableOperation insertOp = TableOperation.Insert(game);
+            table.Execute(insertOp);
         }
 
         public static void Delete(String Id)
         {
             var table = GetTable("games");
-            var game = Games.All().Where(g => g.PartitionKey == "kobopool" && g.RowKey == Id).First();
+            var game = Games.All().Where(g => g.PartitionKey == ConfigurationManager.AppSettings["Account"] && g.RowKey == Id).First();
             TableOperation deleteOp = TableOperation.Delete(game);
             table.Execute(deleteOp);
         }
