@@ -15,7 +15,9 @@ namespace EloWeb.Models
 
         public static void Initialise(IEnumerable<Game> gameEntities)
         {
-            _games = gameEntities.ToList();
+            _games = gameEntities
+                        .OrderBy(g => g.WhenPlayed)
+                        .ToList();
 
             foreach(var game in _games)
                 Players.UpdateRatings(game);
