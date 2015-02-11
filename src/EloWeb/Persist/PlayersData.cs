@@ -1,29 +1,49 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using EloWeb.Models;
+using System.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace EloWeb.Persist
 {
     public class PlayersData
     {
-        private static string _path;
+        private static string account;
 
-        public static IEnumerable<string> Load(string path)
+        static PlayersData()
         {
-            try
-            {
-                _path = path;
-                return File.ReadLines(_path);
-            }
-            catch (FileNotFoundException)
-            {
-                return new List<string>().AsEnumerable();
-            }
+            account = ConfigurationManager.AppSettings["Account"];
         }
 
-        public static void PersistPlayer(string name)
+        public static IEnumerable<PlayerEntity> Load()
         {
-            File.AppendAllText(_path, name + "\n");
+            var table = GetTable("players");
+            TableQuery<PlayerEntity> query = new TableQuery<PlayerEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, account));
+            return table.ExecuteQuery(query);
+        }
+
+        public static void PersistPlayer(Player player)
+        {
+            var playerEntity = new PlayerEntity(account, player.Name, player.IsRetired);
+            var table = GetTable("players");
+            WritePlayer(table, playerEntity);
+        }
+
+        static void WritePlayer(CloudTable table, PlayerEntity player)
+        {
+            TableOperation insertOp = TableOperation.Insert(player);
+            table.Execute(insertOp);
+        }
+
+        private static CloudTable GetTable(string tableName)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connStr);
+            CloudTableClient client = storageAccount.CreateCloudTableClient();
+            CloudTable table = client.GetTableReference(tableName);
+            table.CreateIfNotExists();
+            return table;
         }
     }
 }

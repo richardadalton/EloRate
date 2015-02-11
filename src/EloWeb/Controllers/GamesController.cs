@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EloWeb.Models;
 using EloWeb.Persist;
+using System;
 
 namespace EloWeb.Controllers
 {
@@ -37,12 +38,21 @@ namespace EloWeb.Controllers
         {
             if (game.Winner != game.Loser)
             {
-                GamesData.PersistGame(game.ToString());
+                GamesData.Persist(game);
                 Games.Add(game);
                 Players.UpdateRatings(game);
             }
 
             return Redirect("/");
+        }
+
+        // GET: Games/Delete
+        [HttpGet]
+        public ActionResult Delete(string Id)
+        {
+            GamesData.Delete(Id);
+            Games.Initialise(GamesData.Load());
+            return Redirect("/Games");
         }
 
     }

@@ -16,12 +16,20 @@
     <th>
         Last 20 Games (Most Recent First)        
     </th>
-@foreach (var item in Model) {
+@foreach (var game in Model) {
     <tr>
         <td>
-            @Html.ActionLink(item.Winner, "Details", "Players", new { name = item.Winner }, null)
+            @Html.ActionLink(game.Winner, "Details", "Players", new { name = game.Winner }, null)
              beat 
-            @Html.ActionLink(item.Loser, "Details", "Players", new { name = item.Loser }, null)
+            @Html.ActionLink(game.Loser, "Details", "Players", new { name = game.Loser }, null)
+        </td>
+        <td>
+            @Html.ActionLink(
+                "Delete",
+                "Delete",
+                "Games",
+                    new { confirm = true, Id = game.RowKey },
+                    new { onclick = "return confirm('Do you really want to delete this game?')" })
         </td>
     </tr>
 }

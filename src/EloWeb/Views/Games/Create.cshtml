@@ -23,6 +23,14 @@
                     <td>
                         @game.ToString()
                     </td>
+                    <td>
+                        @Html.ActionLink(
+                            "Delete",
+                            "Delete",
+                            "Games",
+                                new { confirm = true, Id = game.RowKey },
+                                new { onclick = "return confirm('Do you really want to delete this game?')" })
+                    </td>
                 </tr>
             }
         </table>

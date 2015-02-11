@@ -67,8 +67,8 @@ namespace EloWeb.Controllers
         [HttpPost]
         public ActionResult Create(Player player)
         {
-            Players.Add(Player.CreateInitial(player.Name)); 
-            PlayersData.PersistPlayer(player.Name);         
+            Players.Add(Player.CreateInitial(player.Name, false));
+            PlayersData.PersistPlayer(player);
             return Redirect("/Players");
         }
     }

@@ -8,10 +8,9 @@ namespace EloWeb.Models
     {
         private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
 
-        public static void Initialise(IEnumerable<string> names)
+        public static void Initialise(IEnumerable<PlayerEntity> playerEntities)
         {
-            _players = names.Select(Player.CreateInitial).ToDictionary(p => p.Name);
-           Games.All().ForEach(UpdateRatings);            
+            _players = playerEntities.Select(p => Player.CreateInitial(p.Name, p.IsRetired)).ToDictionary(p => p.Name);
         }
 
         public static void Add(Player player)
@@ -37,7 +36,7 @@ namespace EloWeb.Models
 
         public static IEnumerable<Player> Active()
         {
-            return _players.Values.Where(p => !RetiredPlayers.IsRetired(p.Name));
+            return _players.Values.Where(p => !p.IsRetired);
         }
 
         public static IEnumerable<string> Names()
