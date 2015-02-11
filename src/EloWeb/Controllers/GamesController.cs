@@ -38,7 +38,7 @@ namespace EloWeb.Controllers
         {
             if (game.Winner != game.Loser)
             {
-                AzureGamesData.Persist(game);
+                GamesData.Persist(game);
                 Games.Add(game);
                 Players.UpdateRatings(game);
             }
@@ -50,8 +50,8 @@ namespace EloWeb.Controllers
         [HttpGet]
         public ActionResult Delete(string Id)
         {
-            AzureGamesData.Delete(Id);
-            Games.Initialise(AzureGamesData.Load());
+            GamesData.Delete(Id);
+            Games.Initialise(GamesData.Load());
             return Redirect("/Games");
         }
 

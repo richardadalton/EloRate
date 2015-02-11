@@ -7,6 +7,7 @@ namespace EloWeb.Models
         public DateTime WhenPlayed { get; set; }
         public string Winner { get; set; }
         public string Loser { get; set; }
+        public bool Deleted { get; set; }
 
         public override string ToString()
         {

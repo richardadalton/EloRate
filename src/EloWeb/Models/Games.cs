@@ -16,6 +16,7 @@ namespace EloWeb.Models
         public static void Initialise(IEnumerable<Game> gameEntities)
         {
             _games = gameEntities
+                        .Where(g => !g.Deleted)
                         .OrderBy(g => g.WhenPlayed)
                         .ToList();
 

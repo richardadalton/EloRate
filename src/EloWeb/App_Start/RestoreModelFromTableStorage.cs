@@ -11,8 +11,8 @@ namespace EloWeb
     {
         public static void Load()
         {
-            Players.Initialise(AzurePlayersData.Load());
-            Games.Initialise(AzureGamesData.Load());
+            Players.Initialise(PlayersData.Load());
+            Games.Initialise(GamesData.Load());
         }
     }
 }

@@ -7,18 +7,25 @@ using System.Collections.Generic;
 
 namespace EloWeb.Persist
 {
-    public class AzurePlayersData
+    public class PlayersData
     {
+        private static string account;
+
+        static PlayersData()
+        {
+            account = ConfigurationManager.AppSettings["Account"];
+        }
+
         public static IEnumerable<PlayerEntity> Load()
         {
             var table = GetTable("players");
-            TableQuery<PlayerEntity> query = new TableQuery<PlayerEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ConfigurationManager.AppSettings["Account"]));
+            TableQuery<PlayerEntity> query = new TableQuery<PlayerEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, account));
             return table.ExecuteQuery(query);
         }
 
         public static void PersistPlayer(Player player)
         {
-            var playerEntity = new PlayerEntity(ConfigurationManager.AppSettings["Account"], player.Name, player.IsRetired);
+            var playerEntity = new PlayerEntity(account, player.Name, player.IsRetired);
             var table = GetTable("players");
             WritePlayer(table, playerEntity);
         }

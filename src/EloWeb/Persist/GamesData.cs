@@ -8,12 +8,21 @@ using System;
 
 namespace EloWeb.Persist
 {
-    public class AzureGamesData
+    public class GamesData
     {
+        private static string account;
+        private static string tableName;
+
+        static GamesData()
+        {
+            account = ConfigurationManager.AppSettings["Account"];
+            tableName = account + "Games";
+        }
+
         public static IEnumerable<Game> Load()
         {
-            var table = GetTable("games");
-            TableQuery<Game> query = new TableQuery<Game>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ConfigurationManager.AppSettings["Account"]));
+            var table = GetTable(tableName);
+            TableQuery<Game> query = new TableQuery<Game>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, account));
             return table.ExecuteQuery(query);
         }
 
@@ -24,18 +33,21 @@ namespace EloWeb.Persist
             game.WhenPlayed = DateTime.Now;
 
 
-            var table = GetTable("games");
+            var table = GetTable(tableName);
             TableOperation insertOp = TableOperation.Insert(game);
             table.Execute(insertOp);
         }
 
         public static void Delete(String Id)
         {
-            var table = GetTable("games");
+            var table = GetTable(tableName);
             var game = Games.All().Where(g => g.PartitionKey == ConfigurationManager.AppSettings["Account"] && g.RowKey == Id).First();
-            TableOperation deleteOp = TableOperation.Delete(game);
-            table.Execute(deleteOp);
+            game.Deleted = true;
+
+            TableOperation replaceOp = TableOperation.Replace(game);
+            table.Execute(replaceOp);
         }
+
 
         private static CloudTable GetTable(string tableName)
         {
