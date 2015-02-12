@@ -178,7 +178,12 @@
     <Content Include="Views\Tables\LosingStreak.cshtml" />
     <Content Include="Views\Tables\WorstEverLosingStreak.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EloRate.Storage\EloRate.Storage.csproj">
+      <Project>{396ec95d-32f2-4925-ad9f-c20eb71332e6}</Project>
+      <Name>EloRate.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
