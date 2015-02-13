@@ -19,7 +19,7 @@ namespace EloWeb.Controllers
 
         public ActionResult MaxRating()
         {
-            var table = Players.All().OrderByDescending(p => p.MaxRating);
+            var table = Players.All().OrderByDescending(p => p.Rating.MaxRating);
             if (!table.Any())
                 return Redirect("/Players/NewLeague");
 

@@ -23,7 +23,7 @@ namespace EloWeb.Persist
             return table.ExecuteQuery(query);
         }
 
-        public static void PersistPlayer(Player player)
+        public static void PersistPlayer(PlayerEntity player)
         {
             var playerEntity = new PlayerEntity(account, player.Name, player.IsRetired);
             var table = GetTable("players");

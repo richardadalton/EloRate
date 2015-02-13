@@ -119,8 +119,8 @@
     <Compile Include="Models\EloCalc.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Games.cs" />
-    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerEntity.cs" />
+    <Compile Include="Models\PlayerRating.cs" />
     <Compile Include="Models\Players.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Persist\GamesData.cs" />
@@ -150,7 +150,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

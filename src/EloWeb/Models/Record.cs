@@ -6,7 +6,7 @@ namespace EloWeb.Models
 {
     public class Record
     {
-        public static IEnumerable<Player> GetRecordHolders(IEnumerable<Player> players, Func<Player, int> criteria)
+        public static IEnumerable<PlayerEntity> GetRecordHolders(IEnumerable<PlayerEntity> players, Func<PlayerEntity, int> criteria)
         {
             var sorted = players.OrderByDescending(criteria);
             var record = criteria(sorted.First());

@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebGrease.Css.Extensions;
+using System.Configuration;
 
 namespace EloWeb.Models
 {
     public class Players
     {
-        private static Dictionary<string, Player> _players = new Dictionary<string, Player>();
+        private static Dictionary<string, PlayerEntity> _players = new Dictionary<string, PlayerEntity>();
 
         public static void Initialise(IEnumerable<PlayerEntity> playerEntities)
         {
-            _players = playerEntities.Select(p => Player.CreateInitial(p.Name, p.IsRetired)).ToDictionary(p => p.Name);
+            var account = ConfigurationManager.AppSettings["Account"];
+            _players = playerEntities.Select(p => new PlayerEntity(account, p.Name, p.IsRetired)).ToDictionary(p => p.Name);
         }
 
-        public static void Add(Player player)
+        public static void Add(PlayerEntity player)
         {
             _players.Add(player.Name, player);
         }
@@ -23,18 +25,18 @@ namespace EloWeb.Models
             var winner = PlayerByName(game.Winner);
             var loser = PlayerByName(game.Loser);
 
-            var pointsExchanged = EloCalc.PointsExchanged(winner.Rating, loser.Rating);
+            var pointsExchanged = EloCalc.PointsExchanged(winner.Rating.Value, loser.Rating.Value);
 
-            winner.IncreaseRating(pointsExchanged);
-            loser.DecreaseRating(pointsExchanged);
+            winner.Rating.IncreaseRating(pointsExchanged);
+            loser.Rating.DecreaseRating(pointsExchanged);
         }
 
-        public static IEnumerable<Player> All()
+        public static IEnumerable<PlayerEntity> All()
         {
             return _players.Values;
         }
 
-        public static IEnumerable<Player> Active()
+        public static IEnumerable<PlayerEntity> Active()
         {
             return _players.Values.Where(p => !p.IsRetired);
         }
@@ -44,10 +46,10 @@ namespace EloWeb.Models
             return _players.Keys;
         }
 
-        public static Player PlayerByName(string name)
+        public static PlayerEntity PlayerByName(string name)
         {
             if (!_players.ContainsKey(name))
-                return new Player();
+                return new PlayerEntity();
 
             return _players[name];
         }

@@ -38,8 +38,8 @@ namespace EloWeb.Controllers
 
             var recordsView = new Records
             {
-                CurrentTopRanked = Record.GetRecordHolders(activePlayers, p => p.Rating),
-                MostRatingsPointsEver = Record.GetRecordHolders(allPlayers, p => p.MaxRating),
+                CurrentTopRanked = Record.GetRecordHolders(activePlayers, p => p.Rating.Value),
+                MostRatingsPointsEver = Record.GetRecordHolders(allPlayers, p => p.Rating.MaxRating),
                 BestWinRate = Record.GetRecordHolders(activePlayers, p => p.WinRate),
                 LongestWinningStreak = Record.GetRecordHolders(allPlayers, p => p.LongestWinningStreak),
                 CurrentWinningStreak = Record.GetRecordHolders(activePlayers, p => p.CurrentWinningStreak),
@@ -65,7 +65,7 @@ namespace EloWeb.Controllers
 
         // POST: Players/Create
         [HttpPost]
-        public ActionResult Create(Player player)
+        public ActionResult Create(PlayerEntity player)
         {
             Players.Add(Player.CreateInitial(player.Name, false));
             PlayersData.PersistPlayer(player);
