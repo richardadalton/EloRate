@@ -18,6 +18,7 @@
     </th>
 @foreach (var game in Model) {
     <tr>
+        <td>@Html.DisplayFor(modelItem => game.WhenPlayed)</td>
         <td>
             @Html.ActionLink(game.Winner, "Details", "Players", new { name = game.Winner }, null)
              beat 
